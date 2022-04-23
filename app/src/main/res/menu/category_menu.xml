@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/mode"
+        android:title="mode"/>
+    <item android:id="@+id/highTech"
+        android:title="high tech"/>
+    <item android:id="@+id/beauty"
+        android:title="beauty"/>
+    <item android:id="@+id/baby"
+        android:title="baby"/>
+    <item android:id="@+id/Jewellery"
+        android:title="Jewellery"/>
+    <item android:id="@+id/artDeco"
+        android:title="art deco"/>
+</menu>

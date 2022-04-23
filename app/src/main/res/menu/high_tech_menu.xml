@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/Pc"
+        android:title="Pc"/>
+    <item android:id="@+id/Tv"
+        android:title="Tv"/>
+    <item android:id="@+id/ComputersAccessories"
+        android:title="Computers' accessories"/>
+    <item android:id="@+id/Other"
+        android:title="Other"/>
+</menu>

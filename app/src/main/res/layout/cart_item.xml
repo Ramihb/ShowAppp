@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:orientation="horizontal"
+        card_view:cardCornerRadius="10dp"
+        card_view:cardElevation="5dp"
+        card_view:cardUseCompatPadding="true"
+        card_view:contentPadding="10dp"
+        app:cardBackgroundColor="@color/backgroundAd"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <ImageView
+            android:id="@+id/FavImage"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="20dp"
+            android:src="@drawable/ic_baseline_image_24" />
+
+        <TextView
+            android:id="@+id/favTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginStart="200dp"
+            android:layout_marginTop="30dp"
+            android:text="articleTitle"
+            android:textColor="@color/mainText"/>
+
+        <TextView
+            android:id="@+id/favPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginStart="200dp"
+            android:layout_marginTop="70dp"
+            android:text="articlePrice"
+            android:textColor="@color/mainText"/>
+
+        <TextView
+            android:id="@+id/cartQuantity"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginStart="200dp"
+            android:layout_marginTop="110dp"
+            android:text="articleQuantity"
+            android:textColor="@color/mainText"/>
+
+        <ImageView
+            android:id="@+id/DeleteBtn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="340dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:src="@drawable/ic_delete" />
+
+
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

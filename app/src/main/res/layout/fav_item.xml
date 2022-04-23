@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    card_view:cardUseCompatPadding="true"
+    card_view:cardElevation="5dp"
+    card_view:contentPadding="10dp">
+
+
+    <ImageView android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:id="@+id/FavImage"
+        android:layout_marginStart="20dp"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/ic_baseline_image_24"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:text="articleTitle"
+        android:id="@+id/favTitle"
+        android:layout_marginStart="200dp"
+        android:layout_marginTop="30dp"
+        android:textColor="@color/mainText"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:text="articlePrice"
+        android:id="@+id/favPrice"
+        android:layout_marginStart="200dp"
+        android:layout_marginTop="80dp"
+        android:textColor="@color/mainText"/>
+
+    <ImageView
+        android:id="@+id/LoveBtn"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="340dp"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:src="@drawable/ic_heart_filled" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/addArticleToCart"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="180dp"
+        android:layout_marginTop="120dp"
+        android:backgroundTint="@color/pink"
+        android:text="add to cart" />
+
+</androidx.cardview.widget.CardView>

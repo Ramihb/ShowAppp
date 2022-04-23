@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:background="@color/backgroundAd"
+    android:orientation="vertical"
+    tools:context=".Activity.CompanyNewsList">
+
+    <TextView
+        android:id="@+id/availableNewstxt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@string/your_available_news"
+        android:textColor="@color/mainText"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/addNews"
+        android:layout_width="150dp"
+        android:layout_height="45dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/border"
+        android:text="@string/add_news"
+        android:textAlignment="center"
+        android:textSize="25sp"
+        android:textColor="@color/mainText"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp" />
+
+</LinearLayout>

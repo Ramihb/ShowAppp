@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroundAd"
+    tools:context=".Activity.CompanyAddNews">
+
+    <ImageView
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:id="@+id/newsImage"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:src="@drawable/ic_baseline_image_24"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/titleTxt"
+        android:layout_below="@id/newsImage"
+        android:text="@string/news_title"
+        android:gravity="center"
+        android:textColor="@color/mainText"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/newsTitle"
+        android:layout_below="@id/titleTxt"
+        android:background="@drawable/border"
+        android:textColor="@color/mainText"
+        android:textColorHint="@color/mainText"
+        android:text="@string/your_news_title"
+        android:layout_margin="10dp"
+        android:padding="20dp"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/addNews"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/newsTitle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="@color/pink"
+        android:text="@string/add_news" />
+
+</RelativeLayout>

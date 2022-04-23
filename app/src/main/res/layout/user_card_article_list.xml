@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="300dp"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="8dp"
+    android:orientation="vertical"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
+    android:layout_margin="16dp">
+
+
+
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="170dp"
+            android:id="@+id/imageArticle"
+            android:src="@drawable/ic_baseline_image_24"
+            android:layout_margin="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_gravity="center_horizontal"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="title"
+        android:textSize="22sp"
+        android:textColor="@color/mainText"
+        android:id="@+id/articleTitle"
+        android:layout_gravity="bottom|start"
+        android:gravity="center"
+        android:layout_marginBottom="50dp"
+        />
+    <TextView
+        android:layout_width="110dp"
+        android:layout_height="45dp"
+        android:id="@+id/articlePrice"
+        android:text="45dt"
+        android:textSize="22sp"
+        android:layout_gravity="start|bottom"
+        android:textColor="@color/mainText"
+        android:background="@drawable/price_bg"
+        android:gravity="center" />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:baselineAlignBottom="true"
+        android:clickable="true"
+        android:src="@drawable/ic_cart"
+        app:fabSize="mini"
+        android:backgroundTint="@color/newcolor"
+        android:focusable="true"
+        android:id="@+id/addArticleToCartt"
+        android:contentDescription="@string/add_to_cart"
+        android:layout_gravity="end|bottom"/>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:baselineAlignBottom="true"
+        android:clickable="true"
+        android:src="@drawable/ic_heart_empty"
+        app:fabSize="mini"
+        android:backgroundTint="@color/newcolor"
+        android:focusable="true"
+        android:contentDescription="@string/add_to_favourite"
+        android:layout_gravity="end|top"
+        android:id="@+id/LoveBtnn"/>
+</androidx.cardview.widget.CardView>

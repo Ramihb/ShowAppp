@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/artDeco"
+        android:title="art deco"/>
+    <item android:id="@+id/ArtSupplies"
+        android:title="Art Supplies"/>
+    <item android:id="@+id/Other"
+        android:title="Other"/>
+</menu>
