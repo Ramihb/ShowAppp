@@ -20,6 +20,9 @@
         android:theme="@style/Theme.MyApplication"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".Activity.BillActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activity.ShippingAdressActivity"
             android:exported="false" />
         <!--

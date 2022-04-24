@@ -1,6 +1,9 @@
 package com.example.showapp.Activity
 
 import android.Manifest
+import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.location.Address
 import android.location.Geocoder
@@ -8,19 +11,14 @@ import android.location.Location
 import android.location.LocationListener
 import android.os.Build
 import android.os.Bundle
-import android.view.LayoutInflater
+import android.util.Log
 import android.view.View
-import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.RelativeLayout
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.showapp.R
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
-import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -31,6 +29,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import kotlinx.android.synthetic.main.activity_shipping_adress.*
 import java.io.IOException
 
 
@@ -42,19 +41,36 @@ class ShippingAdressActivity : AppCompatActivity(), OnMapReadyCallback, Location
     internal var mCurrLocationMarker: Marker? = null
     internal var mGoogleApiClient: GoogleApiClient? = null
     internal lateinit var mLocationRequest: LocationRequest
+    var positionGps : MutableList<Double>? = ArrayList()
+    private var takePos: ImageButton?= null
+    lateinit var mSharedPrefUser: SharedPreferences
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_shipping_adress)
 
-
+        takePos = findViewById(R.id.button1)
+        //Log.i("type d'objet de google maps a ajouter article",type)
+        takePos!!.setOnClickListener {
+            mSharedPrefUser = getSharedPreferences("UserPref", Context.MODE_PRIVATE)
+            mSharedPrefUser.edit().apply {
+                putString("lat",positionGps!![0].toString())
+                putString("long",positionGps!![1].toString())
+            }.apply()
+            val intent = Intent(applicationContext, UserActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
         val mapFragment = supportFragmentManager.findFragmentById(R.id.myMap) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
     }
 
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap;
+
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ContextCompat.checkSelfPermission(
@@ -70,6 +86,27 @@ class ShippingAdressActivity : AppCompatActivity(), OnMapReadyCallback, Location
             buildGoogleApiClient()
             mMap!!.isMyLocationEnabled = true
         }
+        // change the location of the current location button in the map
+        val locationButton = (myMap.view?.findViewById<View>(Integer.parseInt("1"))?.parent as View).findViewById<View>(Integer.parseInt("2"))
+        val rlp =  locationButton.getLayoutParams() as RelativeLayout.LayoutParams
+        rlp.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0)
+        rlp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE)
+        rlp.setMargins(0, 0, 50, 50)
+        mMap!!.setOnMapClickListener(GoogleMap.OnMapClickListener { latLng ->
+            mMap!!.clear()
+            mMap!!.addMarker(
+                MarkerOptions()
+                    .position(latLng)
+                    .title("Marked by You")
+            )
+            positionGps!!.clear()
+            mMap!!.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
+            Log.d("position selectionne : ", latLng.toString())
+            positionGps!!.add(latLng.latitude)
+            positionGps!!.add(latLng.longitude)
+
+            Log.i("nouvelle position : ", positionGps.toString())
+        })
     }
 
     protected fun buildGoogleApiClient() {

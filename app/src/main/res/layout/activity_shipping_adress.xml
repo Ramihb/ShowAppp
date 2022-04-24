@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -20,15 +20,16 @@
             <EditText
                 android:id="@+id/et_search"
                 android:layout_width="0dp"
-                android:layout_height="20dp"
+                android:layout_height="50dp"
                 android:layout_weight="1"
                 android:hint="Search Location"
                 android:inputType="textPersonName"
                 android:textColor="@color/mainText" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:layout_width="wrap_content"
-                android:layout_height="20dp"
+                android:layout_height="50dp"
+                android:backgroundTint="@color/pink"
                 android:onClick="searchLocation"
                 android:text="Search"
                 android:textColor="@color/white" />
@@ -36,4 +37,14 @@
         </LinearLayout>
 
     </fragment>
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageButton
+        android:id="@+id/button1"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/ic_plus"
+        android:backgroundTint="@color/pink" />
+</RelativeLayout>
