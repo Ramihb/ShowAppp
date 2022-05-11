@@ -9,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.showapp.Api.ApiCompany
 import com.example.showapp.Model.Company
 import com.example.showapp.R
+import com.example.showapp.Utils.LoadingDialog
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -20,10 +22,12 @@ class CompanySignUp : AppCompatActivity() {
 
     lateinit var image:ImageView
     private var selectedImageUri: Uri? = null
+    var loadingDialog = LoadingDialog()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_company_sign_up)
-
+        loadingDialog.LoadingDialog(this)
         image = findViewById(R.id.UserImage)
         val addImage = findViewById<Button>(R.id.AddImage)
         //Begin category Popup menu
@@ -70,6 +74,7 @@ class CompanySignUp : AppCompatActivity() {
         val confirmPassword = findViewById<EditText>(R.id.BrandConfirmPassword)
         var RegisterBusinessBtn = findViewById<Button>(R.id.RegisterBusiness)
         RegisterBusinessBtn.setOnClickListener {
+            loadingDialog.startLoadingDialog()
             uploadImage(firstName.text.toString(),lastName.text.toString(),brandName.text.toString(),number.text.toString().toInt(),email.text.toString(),password.text.toString(),categroy.text.toString())
         }
     }
@@ -124,10 +129,13 @@ class CompanySignUp : AppCompatActivity() {
                     response: Response<Company>
                 ) {
                     Log.i("onResponse goooood", response.body().toString())
+                    loadingDialog.dismissDialog()
+                    showAlertDialog()
                 }
 
                 override fun onFailure(call: Call<Company>, t: Throwable) {
                     println("noooooooooooooooooo")
+                    loadingDialog.dismissDialog()
                 }
 
             })
@@ -139,4 +147,21 @@ class CompanySignUp : AppCompatActivity() {
         val intent = Intent(this@CompanySignUp, MainActivity::class.java)
         startActivity(intent)
     }
+
+    private fun navigateToTermsAndConditions() {
+        val intent = Intent(this, TermsAndConditionsActivity::class.java)
+        startActivity(intent)
+    }
+    //begin Alert dialog
+    private fun showAlertDialog(){
+        MaterialAlertDialogBuilder(this)
+            .setTitle("Alert")
+            .setMessage("Thank you for choosing showapp.tn! \n We have sent you an email to confirm your account \n You must accept user terms and conditions")
+            .setPositiveButton("Ok") {dialog, which ->
+                //showSnackbar("welcome")
+                navigateToTermsAndConditions()
+            }
+            .show()
+    }
+    //end Alert dialog
 }

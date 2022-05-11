@@ -6,12 +6,14 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.showapp.Adapter.NewsAdapter
 import com.example.showapp.Api.ApiCompany
 import com.example.showapp.Model.New
 import com.example.showapp.R
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.activity_company_article_list.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -43,6 +45,9 @@ class CompanyNewsList : AppCompatActivity() {
             Callback<New> {
             override fun onResponse(call: Call<New>, response: Response<New>) {
                 if(response.isSuccessful){
+                    if(response.body()!!.news!!.isEmpty()){
+                        showAlertDialog()
+                    }
                     return callback(response.body()!!.news)
                     Log.i("yessss", response.body().toString())
                     //}
@@ -61,6 +66,18 @@ class CompanyNewsList : AppCompatActivity() {
         val intent = Intent(this@CompanyNewsList, CompanyAddNews::class.java )
         startActivity(intent)
     }
+    //begin Alert dialog
+    private fun showAlertDialog(){
+        MaterialAlertDialogBuilder(this)
+            .setTitle("Alert")
+            .setMessage("Sorry there is no article yet")
+            .setPositiveButton("Ok") {dialog, which ->
+                Toast.makeText(this,"no news yet",Toast.LENGTH_SHORT).show()
+            }
+            .show()
+    }
+    //end Alert dialog
+        
     override fun onBackPressed() {
         //super.onBackPressed()
         finish()

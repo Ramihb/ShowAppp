@@ -21,7 +21,7 @@ class LoadingDialog {
         builder.setView(inflater.inflate(R.layout.loading_dialog, null))
         builder.setCancelable(false)
         dialog = builder.create()
-        //dialog.show()
+        dialog.show()
     }
 
     fun dismissDialog() {

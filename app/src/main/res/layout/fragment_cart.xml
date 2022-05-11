@@ -6,6 +6,33 @@
     android:layout_height="match_parent"
     android:background="@color/backgroundAd"
     tools:context=".Fragment.CartFragment">
+    <params.com.stepview.StatusViewScroller
+        android:id="@+id/StatusViewScroller"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:stepCount="3"
+        app:currentCount="1"
+        app:drawLabels="true"
+        app:circleColorType="fillStroke"
+        app:lineGap="45dp"
+        app:lineWidth="3dp"
+        app:lineColor="@android:color/black"
+        app:lineColorIncomplete="#B4B7BA"
+        app:lineColorCurrent="#91A8D0"
+        app:circleColor="#CC004B8D"
+        app:circleColorCurrent="#004B8D"
+        app:circleColorIncomplete="#BCBCBE"
+        app:textColorLabels="@android:color/white"
+        app:textColorLabelsCurrent="@android:color/white"
+        app:textColorLabelsIncomplete="@android:color/black"
+        app:circleStrokeWidth="4dp"
+        app:circleStrokeColorCurrent="#91A8D0"
+        app:completeDrawable="@drawable/ic_done_black_24"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
     <TextView
         android:layout_marginTop="5dp"
         android:id="@+id/MybagText"
@@ -17,9 +44,9 @@
         android:text="@string/my_cart"
         android:textColor="@color/mainText"
         android:textSize="25sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/StatusViewScroller"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <androidx.recyclerview.widget.RecyclerView
 

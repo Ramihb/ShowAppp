@@ -9,11 +9,9 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.showapp.Api.ApiUser
-import com.example.showapp.Model.Article
-import com.example.showapp.Model.Facture
-import com.example.showapp.Model.PostFacture
 import com.example.showapp.R
 import com.example.showapp.Activity.UserArticleList
+import com.example.showapp.Model.*
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.user_card_article_list.view.*
 import retrofit2.Call
@@ -34,6 +32,35 @@ class UserArticleListAdapter(private val userArticleList: List<Article>, private
             itemView.articlePrice.text = property.price +" Dt"
             Glide.with(itemView).load(property.articlePicture).into(itemView.imageArticle)
             val addArticleToCartt = itemView.findViewById<FloatingActionButton>(R.id.addArticleToCartt)
+            val LoveBtnn = itemView.findViewById<FloatingActionButton>(R.id.LoveBtnn)
+            LoveBtnn.setOnClickListener {
+                val favoritt = Favorite()
+                favoritt.name = property.name
+                favoritt.price = property.price
+                favoritt.favPicture = property.articlePicture
+                favoritt.refArticle = property._id
+                mSharedPref = context.getSharedPreferences("UserPref", Context.MODE_PRIVATE)
+                favoritt.refuser = mSharedPref.getString("UserID", null)
+                val apiuser = ApiUser.create().addToFav(favoritt)
+                apiuser.enqueue(object : Callback<FavoriteResponse> {
+                    override fun onResponse(
+                        call: Call<FavoriteResponse>,
+                        response: Response<FavoriteResponse>
+                    ) {
+                        if (response.isSuccessful) {
+                            println(response.body().toString())
+                            Toast.makeText(context, "article added to favourit", Toast.LENGTH_SHORT).show()
+
+                        } else {
+                            println(response.body().toString())
+                        }
+                    }
+
+                    override fun onFailure(call: Call<FavoriteResponse>, t: Throwable) {
+                        TODO("Not yet implemented")
+                    }
+                })
+            }
             addArticleToCartt.setOnClickListener {
 //                val builder = AlertDialog.Builder(context)
 //                builder.setTitle("Alert")

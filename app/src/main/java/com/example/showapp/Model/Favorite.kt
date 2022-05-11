@@ -12,5 +12,5 @@ data class FavoriteResponse (
     val message: String? = null
         )
 data class FavoriteRefuser (
-    val favorites: List<Favorite>
+    val favorites: MutableList<Favorite>
         )

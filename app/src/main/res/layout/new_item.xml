@@ -36,17 +36,10 @@
             android:fontFamily="@font/metropolis_semibold"
             android:maxLines="2"
             android:text="@string/fashion_sale"
-            android:textColor="@color/mainText"
-            android:textSize="40dp">
+            android:textColor="@color/black"
+            android:textSize="40dp"
+            android:background="@color/gris">
         </TextView>
-        <Button
-            android:id="@+id/productCheck_coverPage"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:text="@string/check"
-            android:background="@drawable/border"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"/>
     </LinearLayout>
 
 

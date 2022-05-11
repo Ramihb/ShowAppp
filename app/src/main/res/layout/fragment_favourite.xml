@@ -8,41 +8,47 @@
     tools:context=".Fragment.FavouriteFragment">
 
 
-        <androidx.recyclerview.widget.RecyclerView
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
-            android:id="@+id/recycler_viewFavorit"/>
-        <LinearLayout
-            android:gravity="center"
-            android:id="@+id/emptyBagMsgLayout"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:layout_centerInParent="true">
-
-            <com.airbnb.lottie.LottieAnimationView
-                android:scaleType="fitCenter"
-                android:id="@+id/animationViewFavPage"
+            android:id="@+id/swipeRefreshLayout">
+            <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:lottie_rawRes="@raw/empty" />
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:id="@+id/recycler_viewFavorit"/>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-            <TextView
+    <LinearLayout
                 android:gravity="center"
+                android:id="@+id/emptyBagMsgLayout"
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/empty_favourite"
-                android:fontFamily="@font/metropolis_semibold"
-                android:textSize="16sp"
-                >
+                android:layout_height="300dp"
+                android:layout_centerInParent="true">
 
-            </TextView>
-        </LinearLayout>
+                <com.airbnb.lottie.LottieAnimationView
+                    android:scaleType="fitCenter"
+                    android:id="@+id/animationViewFavPage"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:lottie_rawRes="@raw/empty" />
+
+                <TextView
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/empty_favourite"
+                    android:fontFamily="@font/metropolis_semibold"
+                    android:textSize="16sp"
+                    >
+
+                </TextView>
+            </LinearLayout>
 
 
 

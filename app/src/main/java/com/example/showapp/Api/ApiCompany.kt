@@ -44,7 +44,7 @@ interface ApiCompany{
 
     //add news
     @Multipart
-    @POST("news")
+    @POST("/news")
     fun addNews(
         @PartMap data : LinkedHashMap<String, RequestBody>,
         @Part newsPicture: MultipartBody.Part
@@ -53,6 +53,10 @@ interface ApiCompany{
     //get news by id
     @GET("/news/brand/{id}")
     fun getCompanyNews(@Path("id") id: String?) : Call<New>
+
+    //get all companys
+    @GET("/company")
+    fun getAllCompanys() : Call<Company>
 
 
     companion object {

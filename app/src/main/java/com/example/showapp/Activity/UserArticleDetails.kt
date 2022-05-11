@@ -2,23 +2,33 @@ package com.example.showapp.Activity
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.graphics.Bitmap
+import android.graphics.Color
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.showapp.Adapter.ProductAdapter
 import com.example.showapp.Api.ApiUser
-import com.example.showapp.Model.Facture
-import com.example.showapp.Model.Favorite
-import com.example.showapp.Model.FavoriteResponse
-import com.example.showapp.Model.PostFacture
+import com.example.showapp.Model.*
 import com.example.showapp.R
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.zxing.BarcodeFormat
+import com.google.zxing.WriterException
+import com.google.zxing.qrcode.QRCodeWriter
+import kotlinx.android.synthetic.main.activity_article_details.*
 import kotlinx.android.synthetic.main.activity_user_article_details.*
+import kotlinx.android.synthetic.main.fragment_home.view.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -28,9 +38,12 @@ class UserArticleDetails : AppCompatActivity() {
     lateinit var mSharedPref: SharedPreferences
     var num = 1
     var isChecked = false
+    lateinit var RecomRecView_ProductDetailsPage: RecyclerView
+    var type :String?= null
+    //lateinit var data : MutableList<String>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_user_article_details)
+        setContentView(R.layout.activity_article_details)
 
         mSharedPref = getSharedPreferences("UserPref", Context.MODE_PRIVATE)
 
@@ -39,38 +52,49 @@ class UserArticleDetails : AppCompatActivity() {
         val picture = intent.getStringExtra("articlePicture")
         val id = intent.getStringExtra("id")
         val details = intent.getStringExtra("details")
-        val type = intent.getStringExtra("type")
+        type = intent.getStringExtra("type")
 
         val namee = findViewById<TextView>(R.id.NameArticleDetails)
         val pricee = findViewById<TextView>(R.id.PriceArticleDetails)
         val picturee = findViewById<ImageView>(R.id.ImageArticleDetails)
         val detailss = findViewById<TextView>(R.id.DetailArticleDetails)
+         RecomRecView_ProductDetailsPage = findViewById(R.id.RecomRecView_ProductDetailsPage)
+        RecomRecView_ProductDetailsPage.layoutManager = LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false)
+        RecomRecView_ProductDetailsPage.setHasFixedSize(true)
+        getAllData { data: List<Article> ->
+            RecomRecView_ProductDetailsPage.adapter = ProductAdapter(data,this)
+        }
 
-        val test = findViewById<ImageView>(R.id.ImageArticleDetailss)
-        collapsing_toolbar.title = name
-        appbar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
+        val btnGenerateQRcode = findViewById<FloatingActionButton>(R.id.QrCodeBtn)
+        btnGenerateQRcode.setOnClickListener {
+            var data = name.toString() + ", " + price.toString() + ",, " + picture.toString() + ",,, " +
+                    id.toString() + ",,,, " + details.toString() + ",,,,, " + type.toString()
+            var dataa = listOf<String>(name.toString(),price.toString(), picture.toString(), id.toString(),
+                details.toString(), type.toString())
+            val writer = QRCodeWriter()
+            try{
+                val bitMatrix = writer.encode(data, BarcodeFormat.QR_CODE, 512, 512)
+                val width = bitMatrix.width
+                val height = bitMatrix.height
+                val bmp = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565)
+                for(x in 0 until width){
+                    for(y in 0 until  height){
+                        bmp.setPixel(x,y, if(bitMatrix[x,y]) Color.BLACK else Color.WHITE)
+                    }
+                }
+                scrollTest.isVisible = false
+                ivQRcodeLayout.isVisible = true
+                ivQRcode.setImageBitmap(bmp)
+            }catch (e: WriterException){
 
-            if (Math.abs(verticalOffset)  >= appBarLayout.totalScrollRange) { // collapse
-                collapsing_toolbar.title = "Category: " + type
-                detailss.text = details
-                namee.text = name
-                pricee.text = price + " DT"
-                Glide.with(applicationContext).load(Uri.parse(picture)).into(test)
-            } else if (verticalOffset == 0) { // fully expand
-
-            } else { // scolling
-                test.setImageResource(0)
-                detailss.text = null
-                namee.text = "Scroll to find details"
-                pricee.text = null
-                collapsing_toolbar.title = name
             }
-        })
+        }
 
 
-//        detailss.text = details
-//        namee.text = name
-//        pricee.text = price + " DT"
+        detailss.text = details
+        namee.text = name
+        pricee.text = price + " DT"
+        Log.i("picture asba",picture.toString())
         Glide.with(applicationContext).load(Uri.parse(picture)).into(picturee)
         val refuser = mSharedPref.getString("UserID", null)
         val LoveBtn = findViewById<FloatingActionButton>(R.id.LoveBtn)
@@ -99,6 +123,7 @@ class UserArticleDetails : AppCompatActivity() {
                     ) {
                         if (response.isSuccessful) {
                             println(response.body().toString())
+                            Toast.makeText(this@UserArticleDetails, "article deleted from favourite", Toast.LENGTH_SHORT).show()
                         } else {
                             println(response.body().toString())
                         }
@@ -121,6 +146,7 @@ class UserArticleDetails : AppCompatActivity() {
                             println(response.body().toString())
                             println("refuser" + refuser)
                             println("refArticle" + id)
+                            Toast.makeText(this@UserArticleDetails, "article added to favourite", Toast.LENGTH_SHORT).show()
                         } else {
                             println(response.body().toString())
                         }
@@ -179,7 +205,7 @@ class UserArticleDetails : AppCompatActivity() {
 
 
         //test vottom sheet dialog
-        val addTocart1 = findViewById<FloatingActionButton>(R.id.addArticleToCart)
+        val addTocart1 = findViewById<Button>(R.id.addArticleToCart)
         addTocart1.setOnClickListener {
             val bottomSheetDialog = BottomSheetDialog(
                 this@UserArticleDetails, R.style.BottomSheetDialogTheme
@@ -236,6 +262,26 @@ class UserArticleDetails : AppCompatActivity() {
             bottomSheetDialog.show()
         }
 
+    }
+    private fun getAllData(callback: (List<Article>) -> Unit){
+        val apiInterface = ApiUser.create()
+
+        apiInterface.getCompanyArticle(type).enqueue(object:
+            Callback<Article> {
+            override fun onResponse(call: Call<Article>, response: Response<Article>) {
+                if(response.isSuccessful){
+                    return callback(response.body()!!.articles!!)
+                    Log.i("yessss", response.body().toString())
+                    //}
+                } else {
+                    Log.i("nooooo", response.body().toString())                }
+            }
+
+            override fun onFailure(call: Call<Article>, t: Throwable) {
+                t.printStackTrace()
+                println("OnFailure")
+            }
+        })
     }
 
 

@@ -84,6 +84,23 @@ dependencies {
     implementation 'com.google.android.gms:play-services-maps:18.0.2'
     implementation 'com.google.android.gms:play-services-location:19.0.1'
 
-    //pdf generator
+    //swipe actions in recycler view
+    implementation 'it.xabaras.android:recyclerview-swipedecorator:1.2.3'
+    //swipe to refresh
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+
+    //itextpdf
     implementation 'com.itextpdf:itextg:5.5.10'
+    //dexter
+    implementation 'com.karumi:dexter:6.0.0'
+    //PDFView
+    implementation 'com.github.barteksc:android-pdf-viewer:2.8.2'
+    //stepview
+    implementation 'com.params.stepview:stepview:1.0.2'
+
+    //Qr Code creation
+    implementation 'com.journeyapps:zxing-android-embedded:3.0.2@aar'
+    implementation 'com.google.zxing:core:3.2.0'
+    //Qr Code Scanner
+    implementation 'com.budiyev.android:code-scanner:2.1.0'
 }

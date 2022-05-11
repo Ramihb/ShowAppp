@@ -17,54 +17,59 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class FavoritViewAdapter(private val favList : List<Favorite>,val context: Context): RecyclerView.Adapter<FavoritViewAdapter.ViewHolder>() {
-
+class FavoritViewAdapter(private val favList : MutableList<Favorite>,val context: Context): RecyclerView.Adapter<FavoritViewAdapter.ViewHolder>() {
+    lateinit var refuser: String
+    lateinit var id:String
     class ViewHolder(view : View): RecyclerView.ViewHolder(view){
 
-        lateinit var refuser: String
-        lateinit var id:String
+
 
         fun bind(property: Favorite, context: Context){
             itemView.favTitle.text = property.name
             itemView.favPrice.text = property.price
             Glide.with(itemView).load(property.favPicture).into(itemView.FavImage)
-            refuser = property.refuser.toString()
-            id = property.refArticle.toString()
+
             var loveBtn = itemView.findViewById<ImageView>(R.id.LoveBtn)
             loveBtn.setOnClickListener {
-                val builder = AlertDialog.Builder(context)
-                builder.setTitle("Alert")
-                builder.setMessage("Are you sure you want to delete this article from favourit?")
-                builder.setPositiveButton(android.R.string.yes) { dialog, which ->
-                    val apiuserr = ApiUser.create().deleteFromFav(id,refuser)
-                    apiuserr.enqueue(object: Callback<FavoriteResponse> {
-                        override fun onResponse(
-                            call: Call<FavoriteResponse>,
-                            response: Response<FavoriteResponse>
-                        ) {
-                            if(response.isSuccessful){
-                                println(response.body().toString())
-                            } else{
-                                println(response.body().toString())
-                            }
-                        }
 
-                        override fun onFailure(call: Call<FavoriteResponse>, t: Throwable) {
-                            TODO("Not yet implemented")
-                        }
-                    })
-                }
-
-                builder.setNegativeButton(android.R.string.no) { dialog, which ->
-                }
-                builder.show()
 
 
             }
         }
 
     }
+    fun deleteItem(i: Int){
+        refuser = favList[i].refuser.toString()
+        id = favList[i].refArticle.toString()
 
+        val builder = AlertDialog.Builder(context)
+        builder.setTitle("Alert")
+        builder.setMessage("Are you sure you want to delete this article from favourit?")
+        builder.setPositiveButton(android.R.string.yes) { dialog, which ->
+            val apiuserr = ApiUser.create().deleteFromFav(id,refuser)
+            apiuserr.enqueue(object: Callback<FavoriteResponse> {
+                override fun onResponse(
+                    call: Call<FavoriteResponse>,
+                    response: Response<FavoriteResponse>
+                ) {
+                    if(response.isSuccessful){
+                        println(response.body().toString())
+                        favList.removeAt(i)
+                    } else{
+                        println(response.body().toString())
+                    }
+                }
+
+                override fun onFailure(call: Call<FavoriteResponse>, t: Throwable) {
+                    TODO("Not yet implemented")
+                }
+            })
+        }
+
+        builder.setNegativeButton(android.R.string.no) { dialog, which ->
+        }
+        builder.show()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.fav_item, parent, false))

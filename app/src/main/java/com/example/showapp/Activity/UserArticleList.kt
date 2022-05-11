@@ -84,12 +84,12 @@ class UserArticleList : AppCompatActivity(), UserArticleListAdapter.OnItemClickL
             }
         })
     }
-    override fun onBackPressed() {
+   /* override fun onBackPressed() {
         //super.onBackPressed()
         finish()
         val intent = Intent(applicationContext, UserActivity::class.java)
         startActivity(intent)
-    }
+    }*/
 
     override fun onItemClick(position: Int,articless: List<Article>) {
         val intent = Intent(this@UserArticleList, UserArticleDetails::class.java)

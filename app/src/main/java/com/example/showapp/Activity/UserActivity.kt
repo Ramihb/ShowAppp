@@ -106,11 +106,11 @@ class UserActivity : AppCompatActivity() {
 
     }
 
-    override fun onBackPressed() {
+    /*override fun onBackPressed() {
         finish()
         val intent = Intent(this@UserActivity, MainActivity::class.java)
         startActivity(intent)
-    }
+    }*/
 
 
 }

@@ -83,6 +83,9 @@ interface ApiUser {
                     @Part profilePicture: MultipartBody.Part
     ) : Call<User>
 
+    //login admin
+    @POST("admin/login")
+    fun loginAdmin(@Body admin: Admin): Call<Admin>
 
 
     companion object {

@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context=".Activity.UserArticleDetails">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/ivQRcodeLayout"
+        android:visibility="gone">
+        <ImageView
+            android:id="@+id/ivQRcode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/scrollTest">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/backgroundAd">
+
+
+            <ImageView
+                android:id="@+id/ImageArticleDetails"
+                android:layout_width="match_parent"
+                android:layout_height="450dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/LoveBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:layout_marginTop="15dp"
+                android:backgroundTint="@color/teal"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/ic_heart_empty"
+                app:fabSize="normal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/ImageArticleDetails" />
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/QrCodeBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="100dp"
+                android:layout_marginTop="15dp"
+                android:backgroundTint="@color/teal"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/ic_baseline_qr_code_24"
+                app:fabSize="normal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/ImageArticleDetails" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ImageArticleDetails">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/NameArticleDetails"
+                        android:layout_width="0dp"
+                        android:maxEms="30"
+                        android:layout_height="match_parent"
+                        android:layout_weight="3"
+                        android:fontFamily="@font/metropolis_semibold"
+                        android:text=""
+                        android:maxLines="2"
+                        android:textColor="@color/mainText"
+                        android:textSize="25sp" />
+
+                    <TextView
+                        android:id="@+id/PriceArticleDetails"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/metropolis_semibold"
+                        android:gravity="end"
+                        android:text=""
+                        android:textColor="@color/mainText"
+                        android:textSize="25sp" />
+                </LinearLayout>
+
+                <RatingBar
+                    android:id="@+id/productRating_singleProduct"
+                    style="@style/Widget.AppCompat.RatingBar.Indicator"
+                    android:layout_width="180dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:numStars="5"
+                    android:rating="3"
+                    android:scaleX=".5"
+                    android:scaleY=".5"
+                    android:transformPivotX="0dp"
+                    android:transformPivotY="15dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="10dp"
+                    android:fontFamily="@font/metropolis_regular"
+                    android:text="Product Details"
+                    android:textColor="@color/mainText"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/DetailArticleDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:textColor="@color/textAd"
+                    android:fontFamily="@font/metropolis_regular"
+                    android:maxLines="5"
+                    android:text=""
+                    android:textSize="13sp" />
+
+
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/newLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout6">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/metropolis_semibold"
+                            android:text="You can also Like this "
+                            android:textColor="@color/mainText"
+                            android:textSize="25sp" />
+
+                        <androidx.legacy.widget.Space
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1" />
+
+                    </LinearLayout>
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:fontFamily="@font/metropolis_regular"
+                        android:text="Recommended"
+                        android:textColor="@color/textAd"
+                        android:textSize="11sp" />
+
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_marginBottom="20dp"
+                    android:id="@+id/RecomRecView_ProductDetailsPage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp">
+
+                </androidx.recyclerview.widget.RecyclerView>
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/backgroundAd"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/addArticleToCart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="20dp"
+            android:text="Add To Bag"
+            android:backgroundTint="@color/teal"/>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

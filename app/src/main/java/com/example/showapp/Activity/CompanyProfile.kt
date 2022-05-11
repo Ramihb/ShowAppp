@@ -70,6 +70,8 @@ class CompanyProfile : AppCompatActivity() {
         startActivity(intent)
     }
 
+    override fun onBackPressed() {
+    }
 
 }
 

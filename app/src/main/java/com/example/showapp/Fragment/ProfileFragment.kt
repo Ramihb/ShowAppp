@@ -3,6 +3,7 @@ package com.example.showapp.Fragment
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -28,7 +29,11 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import android.widget.ArrayAdapter
+import com.example.showapp.Activity.QrCodeScannerActivity
 import com.example.showapp.Activity.ShippingAdressActivity
+import com.example.showapp.Activity.SignatureActivity
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import kotlinx.android.synthetic.main.fragment_profile.*
 
 
 class ProfileFragment : Fragment() {
@@ -47,6 +52,11 @@ class ProfileFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
+
+        val QrCodeScanner = view.findViewById<TextView>(R.id.QrCodeScanner)
+        QrCodeScanner.setOnClickListener {
+            navigateToQrCodeScanner()
+        }
         //testing multi languages
         myLanguage = Language(requireContext())
         val languageBtn = view.findViewById<TextView>(R.id.Language)
@@ -281,13 +291,25 @@ class ProfileFragment : Fragment() {
             navigateToShippingAddress()
         }
 
+        val AddSignature = view.findViewById<TextView>(R.id.AddSignature)
+        AddSignature.setOnClickListener {
+            navigateToAddSignature()
+        }
+
 
         val logOutBtn = view.findViewById<Button>(R.id.LogOutUser)
         logOutBtn.setOnClickListener {
-            mSharedPref.edit().clear().apply()
-            mGoogleSignInClient.signOut()
-            navigateToLogin()
+            showAlertDialog()
+//            mSharedPref.edit().clear().apply()
+//            mGoogleSignInClient.signOut()
+//            requireActivity().finish()
+//            navigateToLogin()
 
+        }
+
+        val FinishedOrders = view.findViewById<TextView>(R.id.FinishedOrders)
+        FinishedOrders.setOnClickListener {
+            navigateToFinishedOrders()
         }
         return view
     }
@@ -309,5 +331,33 @@ class ProfileFragment : Fragment() {
         val intent = Intent(activity, ShippingAdressActivity::class.java)
         requireActivity().startActivity(intent)
     }
+    private fun navigateToFinishedOrders() {
+        val intent = Intent(activity, com.example.showapp.Activity.FinishedOrders::class.java)
+        requireActivity().startActivity(intent)
+    }
 
+    private fun navigateToAddSignature() {
+        val intent = Intent(activity, SignatureActivity::class.java)
+        requireActivity().startActivity(intent)
+    }
+    private fun navigateToQrCodeScanner() {
+        val intent = Intent(activity, QrCodeScannerActivity::class.java)
+        requireActivity().startActivity(intent)
+    }
+
+    private fun showAlertDialog(){
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle("Logout")
+            .setMessage("are you sure you want to logout?")
+            .setPositiveButton("Ok") {dialog, which ->
+                mSharedPref.edit().clear().apply()
+                mGoogleSignInClient.signOut()
+                requireActivity().finish()
+                navigateToLogin()
+            }
+            .setNegativeButton("Cancel") {dialog, which ->
+
+            }
+            .show()
+    }
 }

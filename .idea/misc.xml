@@ -6,6 +6,9 @@
         <entry key="..\:/Users/admin/AppData/Local/Android/Sdk/platforms/android-31/data/res/layout/simple_list_item_1.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/admin/OneDrive/Bureau/AndroidShowapp/app/src/main/res/drawable/border.xml" value="0.22314814814814815" />
         <entry key="..\:/Users/admin/OneDrive/Bureau/AndroidShowapp/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/admin/OneDrive/Bureau/ShowAppp/app/src/main/res/layout/activity_article_details.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/admin/OneDrive/Bureau/ShowAppp/app/src/main/res/layout/activity_qr_code_scanner.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/admin/OneDrive/Bureau/ShowAppp/app/src/main/res/layout/fragment_profile.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/admin/OneDrive/Bureau/ShowappAndroid/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.26615384615384613" />
         <entry key="..\:/Users/admin/OneDrive/Bureau/ShowappAndroid/app/src/main/res/drawable/border.xml" value="0.26615384615384613" />
         <entry key="..\:/Users/admin/OneDrive/Bureau/ShowappAndroid/app/src/main/res/drawable/border_btn.xml" value="0.154" />
@@ -25,20 +28,28 @@
         <entry key="..\:/Users/admin/OneDrive/Bureau/ShowappAndroid/app/src/main/res/drawable/layout_bgg.xml" value="0.135" />
         <entry key="..\:/Users/admin/OneDrive/Bureau/ShowappAndroid/app/src/main/res/drawable/price_bg.xml" value="0.184" />
         <entry key="..\:/Users/admin/OneDrive/Bureau/ShowappAndroid/app/src/main/res/drawable/selector_wishlist_item.xml" value="0.3828125" />
-        <entry key="..\:/Users/admin/OneDrive/Bureau/ShowappAndroid/app/src/main/res/layout/activity_bill.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/admin/OneDrive/Bureau/ShowappAndroid/app/src/main/res/layout/activity_company_add_article.xml" value="0.18" />
+        <entry key="..\:/Users/admin/OneDrive/Bureau/ShowappAndroid/app/src/main/res/layout/activity_admin_login.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/admin/OneDrive/Bureau/ShowappAndroid/app/src/main/res/layout/activity_admin_main.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/admin/OneDrive/Bureau/ShowappAndroid/app/src/main/res/layout/activity_article_details.xml" value="0.23232323232323232" />
+        <entry key="..\:/Users/admin/OneDrive/Bureau/ShowappAndroid/app/src/main/res/layout/activity_bill.xml" value="0.27525252525252525" />
+        <entry key="..\:/Users/admin/OneDrive/Bureau/ShowappAndroid/app/src/main/res/layout/activity_company_add_article.xml" value="0.536" />
         <entry key="..\:/Users/admin/OneDrive/Bureau/ShowappAndroid/app/src/main/res/layout/activity_company_add_news.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/admin/OneDrive/Bureau/ShowappAndroid/app/src/main/res/layout/activity_company_article_list.xml" value="0.1" />
         <entry key="..\:/Users/admin/OneDrive/Bureau/ShowappAndroid/app/src/main/res/layout/activity_company_news_list.xml" value="0.17831813576494426" />
         <entry key="..\:/Users/admin/OneDrive/Bureau/ShowappAndroid/app/src/main/res/layout/activity_company_profile.xml" value="0.2" />
         <entry key="..\:/Users/admin/OneDrive/Bureau/ShowappAndroid/app/src/main/res/layout/activity_company_sign_up.xml" value="0.18" />
+        <entry key="..\:/Users/admin/OneDrive/Bureau/ShowappAndroid/app/src/main/res/layout/activity_finished_orders.xml" value="0.14492753623188406" />
         <entry key="..\:/Users/admin/OneDrive/Bureau/ShowappAndroid/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/Users/admin/OneDrive/Bureau/ShowappAndroid/app/src/main/res/layout/activity_maps.xml" value="0.22735507246376813" />
+        <entry key="..\:/Users/admin/OneDrive/Bureau/ShowappAndroid/app/src/main/res/layout/activity_scroll.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/admin/OneDrive/Bureau/ShowappAndroid/app/src/main/res/layout/activity_second.xml" value="0.1" />
         <entry key="..\:/Users/admin/OneDrive/Bureau/ShowappAndroid/app/src/main/res/layout/activity_shipping_adress.xml" value="0.1890625" />
+        <entry key="..\:/Users/admin/OneDrive/Bureau/ShowappAndroid/app/src/main/res/layout/activity_signature.xml" value="0.1453804347826087" />
+        <entry key="..\:/Users/admin/OneDrive/Bureau/ShowappAndroid/app/src/main/res/layout/activity_splash_screen.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/admin/OneDrive/Bureau/ShowappAndroid/app/src/main/res/layout/activity_terms_and_conditions.xml" value="0.10955056179775281" />
         <entry key="..\:/Users/admin/OneDrive/Bureau/ShowappAndroid/app/src/main/res/layout/activity_user.xml" value="0.3342391304347826" />
-        <entry key="..\:/Users/admin/OneDrive/Bureau/ShowappAndroid/app/src/main/res/layout/activity_user_article_details.xml" value="0.1" />
-        <entry key="..\:/Users/admin/OneDrive/Bureau/ShowappAndroid/app/src/main/res/layout/activity_user_article_list.xml" value="0.16161616161616163" />
+        <entry key="..\:/Users/admin/OneDrive/Bureau/ShowappAndroid/app/src/main/res/layout/activity_user_article_details.xml" value="0.22" />
+        <entry key="..\:/Users/admin/OneDrive/Bureau/ShowappAndroid/app/src/main/res/layout/activity_user_article_list.xml" value="0.10919540229885058" />
         <entry key="..\:/Users/admin/OneDrive/Bureau/ShowappAndroid/app/src/main/res/layout/activity_user_facture.xml" value="0.17831813576494426" />
         <entry key="..\:/Users/admin/OneDrive/Bureau/ShowappAndroid/app/src/main/res/layout/activity_user_forget_password.xml" value="0.1828125" />
         <entry key="..\:/Users/admin/OneDrive/Bureau/ShowappAndroid/app/src/main/res/layout/activity_user_forget_password2.xml" value="0.1828125" />
@@ -48,7 +59,7 @@
         <entry key="..\:/Users/admin/OneDrive/Bureau/ShowappAndroid/app/src/main/res/layout/fragment_cart.xml" value="0.22" />
         <entry key="..\:/Users/admin/OneDrive/Bureau/ShowappAndroid/app/src/main/res/layout/fragment_favourite.xml" value="0.1" />
         <entry key="..\:/Users/admin/OneDrive/Bureau/ShowappAndroid/app/src/main/res/layout/fragment_home.xml" value="0.25" />
-        <entry key="..\:/Users/admin/OneDrive/Bureau/ShowappAndroid/app/src/main/res/layout/fragment_profile.xml" value="0.2828282828282828" />
+        <entry key="..\:/Users/admin/OneDrive/Bureau/ShowappAndroid/app/src/main/res/layout/fragment_profile.xml" value="0.1" />
         <entry key="..\:/Users/admin/OneDrive/Bureau/ShowappAndroid/app/src/main/res/layout/fragment_search.xml" value="0.22" />
         <entry key="..\:/Users/admin/OneDrive/Bureau/ShowappAndroid/app/src/main/res/layout/layout_bottom_sheet.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/admin/OneDrive/Bureau/ShowappAndroid/app/src/main/res/layout/layout_child.xml" value="0.2" />

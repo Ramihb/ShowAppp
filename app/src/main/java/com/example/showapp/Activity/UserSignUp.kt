@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.showapp.Api.ApiUser
 import com.example.showapp.Model.User
 import com.example.showapp.R
+import com.example.showapp.Utils.LoadingDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_user_sign_up.*
@@ -26,13 +27,15 @@ class UserSignUp : AppCompatActivity() {
     lateinit var image:ImageView
     private var selectedImageUri: Uri? = null
     private var newsLettre: Boolean? = null
+    var loadingDialog = LoadingDialog()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_sign_up)
         val addImage = findViewById<Button>(R.id.AddImage)
         image = findViewById<ImageView>(R.id.UserImage)
-
+        loadingDialog.LoadingDialog(this)
         addImage.setOnClickListener{
             Intent(Intent.ACTION_PICK).also {
                 it.type = "image/*"
@@ -81,6 +84,7 @@ class UserSignUp : AppCompatActivity() {
                 return@setOnClickListener
             }
             if(password.text.toString() == confirmPassword.text.toString()) {
+                loadingDialog.startLoadingDialog()
                 login(
                     firstName.text.toString(),
                     lastName.text.toString(),
@@ -130,12 +134,13 @@ class UserSignUp : AppCompatActivity() {
 
         val apiInterface = ApiUser.create()
         val data: LinkedHashMap<String, RequestBody> = LinkedHashMap()
-        newsLettre = false
+        newsLettre = true
         data["firstName"] = RequestBody.create(MultipartBody.FORM, firstName)
         data["lastName"] = RequestBody.create(MultipartBody.FORM, lastName)
         data["email"] = RequestBody.create(MultipartBody.FORM, email)
         data["password"] = RequestBody.create(MultipartBody.FORM, password)
         data["phoneNumber"] = RequestBody.create(MultipartBody.FORM, number)
+        data["newsLettre"] = RequestBody.create(MultipartBody.FORM, newsLettre.toString())
 
         if (profilePicture != null) {
             apiInterface.userSignUp(data,profilePicture).enqueue(object:
@@ -144,8 +149,10 @@ class UserSignUp : AppCompatActivity() {
                     call: Call<User>,
                     response: Response<User>
                 ) {
+                    Log.i("waaaa", response.body().toString())
                     if(response.isSuccessful){
                         Log.i("onResponse goooood", response.body().toString())
+                        loadingDialog.dismissDialog()
                         showAlertDialog()
                     } else {
                         Log.i("OnResponse not good", response.body().toString())
@@ -154,6 +161,7 @@ class UserSignUp : AppCompatActivity() {
 
                 override fun onFailure(call: Call<User>, t: Throwable) {
                     println("noooooooooooooooooo")
+                    loadingDialog.dismissDialog()
                 }
 
             })
@@ -167,7 +175,7 @@ class UserSignUp : AppCompatActivity() {
             .setTitle("Alert")
             .setMessage("Thank you for choosing showapp.tn! \n We have sent you an email to confirm your account")
             .setPositiveButton("Ok") {dialog, which ->
-                showSnackbar("welcome")
+                navigateToLogin()
             }
             .show()
     }
@@ -179,6 +187,11 @@ class UserSignUp : AppCompatActivity() {
     }
     override fun onBackPressed() {
         //super.onBackPressed()
+        finish()
+        val intent = Intent(this@UserSignUp, MainActivity::class.java)
+        startActivity(intent)
+    }
+    private fun navigateToLogin() {
         finish()
         val intent = Intent(this@UserSignUp, MainActivity::class.java)
         startActivity(intent)

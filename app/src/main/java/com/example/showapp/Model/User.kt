@@ -15,6 +15,6 @@ data class User (
     val reponse : String? = null,
     var code: Int?= null,
     val message:String? = null,
-    val newsLettre:String? = null
+    val newsLettre:Boolean? = null
         )
 

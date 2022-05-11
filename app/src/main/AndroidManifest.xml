@@ -10,6 +10,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.Camera"/>
 
     <application
         android:allowBackup="true"
@@ -20,8 +21,23 @@
         android:theme="@style/Theme.MyApplication"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".Activity.BillActivity"
+            android:name=".Activity.QrCodeScannerActivity"
             android:exported="false" />
+        <activity
+            android:name=".Activity.AdminMainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.AdminLoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.TermsAndConditionsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.SignatureActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.FinishedOrders"
+            android:exported="true" />
         <activity
             android:name=".Activity.ShippingAdressActivity"
             android:exported="false" />

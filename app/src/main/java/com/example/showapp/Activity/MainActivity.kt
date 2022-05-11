@@ -55,8 +55,21 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         checkNetworkConnection()
+        val showappImage = findViewById<ImageView>(R.id.Showapp)
+        var clicks = 0
+        showappImage.setOnClickListener {
+            clicks = clicks + 1
+            println("testing clicks"+clicks)
+            if (clicks == 5) {
+                Toast.makeText(this,"admin login enabled",Toast.LENGTH_SHORT).show()
+            }
+            if(clicks>=6){
+                val intent = Intent(this@MainActivity, AdminLoginActivity::class.java)
+                startActivity(intent)
+                showappImage.setEnabled(false)
 
-
+            }
+        }
 
         animationView = findViewById(R.id.animationView)
         hideLayout()
@@ -88,8 +101,6 @@ class MainActivity : AppCompatActivity() {
         //val loadingDialog = LoadingDialog()
         loadingDialog.LoadingDialog(this)
         loginBtn.setOnClickListener {
-            //var loginMail: EditText = findViewById(R.id.EmailInput)
-            //var loginPassword: EditText = findViewById(R.id.PasswordInput)
             loginMail = findViewById(R.id.EmailInput)
             loginPassword = findViewById(R.id.PasswordInput)
             if (loginMail.text.toString().isEmpty()) {
@@ -110,20 +121,6 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        /*loginBtn.setOnClickListener {
-            if(loginMail.text.toString().isEmpty()){
-                loginMail.error = "Email required"
-                loginMail.requestFocus()
-                return@setOnClickListener
-            }
-            if(loginPassword.text.toString().isEmpty()){
-                loginPassword.error = "password required"
-                loginPassword.requestFocus()
-                return@setOnClickListener
-            }
-
-        }*/
-
         val ForgetPasswordBtn = findViewById<TextView>(R.id.ForgetPassword)
         ForgetPasswordBtn.setOnClickListener {
             navigateToForgetPassword()
@@ -138,6 +135,7 @@ class MainActivity : AppCompatActivity() {
             navigateToCompanyProfile()
         }
         mSharedPrefUser = getSharedPreferences("UserPref", Context.MODE_PRIVATE)
+
         if (mSharedPrefUser.getBoolean("session", false)) {
             navigateToUser()
         }
@@ -223,6 +221,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<Company>, t: Throwable) {
+                hideLayout()
                 Toast.makeText(applicationContext, "erreur server", Toast.LENGTH_LONG).show()
             }
 
@@ -271,8 +270,8 @@ class MainActivity : AppCompatActivity() {
 
             override fun onFailure(call: Call<User>, t: Throwable) {
                 //loadingDialog.dismissDialog()
-                hideLayout()
                 Toast.makeText(applicationContext, "erreur server", Toast.LENGTH_LONG).show()
+                hideLayout()
             }
 
         })
