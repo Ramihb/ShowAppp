@@ -4,11 +4,14 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.showapp.Api.ApiUser
+import com.example.showapp.Model.Facture
 import com.example.showapp.Model.Favorite
 import com.example.showapp.Model.FavoriteResponse
 import com.example.showapp.R
@@ -26,13 +29,38 @@ class FavoritViewAdapter(private val favList : MutableList<Favorite>,val context
 
         fun bind(property: Favorite, context: Context){
             itemView.favTitle.text = property.name
-            itemView.favPrice.text = property.price
+            itemView.favPrice.text = property.price + " DT"
             Glide.with(itemView).load(property.favPicture).into(itemView.FavImage)
 
-            var loveBtn = itemView.findViewById<ImageView>(R.id.LoveBtn)
-            loveBtn.setOnClickListener {
+            var addArticleToCart = itemView.findViewById<Button>(R.id.addArticleToCart)
+            addArticleToCart.setOnClickListener {
+                val facturee = Facture()
+                facturee.qte = "1"
+                facturee.cartPicture = property.favPicture
+                facturee.name = property.name
+                facturee.price = property.price
+                facturee.refArticle = property.refArticle
+                facturee.refuser = property.refuser
+                val apiuser = ApiUser.create().addToCart(facturee)
+                apiuser.enqueue(object : Callback<Facture> {
+                    override fun onResponse(
+                        call: Call<Facture>,
+                        response: Response<Facture>
+                    ) {
+                        if (response.isSuccessful) {
+                            println(response.body().toString())
+                            //println("refuser" + refuser)
+                            //println("refArticle" + id)
+                            Toast.makeText(context, "article added to cart", Toast.LENGTH_SHORT).show()
+                        } else {
+                            println(response.body().toString())
+                        }
+                    }
 
-
+                    override fun onFailure(call: Call<Facture>, t: Throwable) {
+                        TODO("Not yet implemented")
+                    }
+                })
 
             }
         }

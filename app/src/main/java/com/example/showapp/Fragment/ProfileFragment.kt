@@ -92,6 +92,7 @@ class ProfileFragment : Fragment() {
         mSharedPref = this.requireActivity().getSharedPreferences("UserPref", Context.MODE_PRIVATE)
         val profileImage = view.findViewById<ImageView>(R.id.profileImage)
         val refuser = mSharedPref.getString("UserID", null)
+        Log.i("keys", mSharedPref.all.toString())
         val userPicture = mSharedPref.getString("UserPicture", null)
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestEmail()
@@ -351,7 +352,9 @@ class ProfileFragment : Fragment() {
             .setMessage("are you sure you want to logout?")
             .setPositiveButton("Ok") {dialog, which ->
                 mSharedPref.edit().clear().apply()
-                mGoogleSignInClient.signOut()
+                mGoogleSignInClient.signOut().addOnCompleteListener {
+                    println("sign out google : " +it.result)
+                }
                 requireActivity().finish()
                 navigateToLogin()
             }
@@ -360,4 +363,5 @@ class ProfileFragment : Fragment() {
             }
             .show()
     }
+
 }

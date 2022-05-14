@@ -22,15 +22,15 @@
         android:src="@drawable/ic_baseline_image_24"/>
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
         android:text="articleTitle"
         android:id="@+id/favTitle"
         android:layout_marginStart="200dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="45dp"
         android:textColor="@color/mainText"/>
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
         android:text="articlePrice"
         android:id="@+id/favPrice"
         android:layout_marginStart="200dp"

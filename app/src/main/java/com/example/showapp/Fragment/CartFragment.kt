@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.drawable.Drawable
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -21,9 +22,7 @@ import com.example.showapp.Activity.ShippingAdressActivity
 import com.example.showapp.Activity.SignatureActivity
 import com.example.showapp.Api.ApiUser
 import com.example.showapp.Adapter.FactureViewAdapter
-import com.example.showapp.Model.BillModelPDF
-import com.example.showapp.Model.Facture
-import com.example.showapp.Model.GetFactures
+import com.example.showapp.Model.*
 import com.example.showapp.R
 import com.example.showapp.Utils.Pdf
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -38,6 +37,7 @@ import kotlinx.android.synthetic.main.fragment_cart.view.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.time.LocalDateTime
 
 
 class CartFragment : Fragment() {
@@ -70,7 +70,6 @@ class CartFragment : Fragment() {
         cityName = mSharedPrefUser.getString("cityName", null).toString()
         Signature = mSharedPrefUser.getString("pathhh", "nulll").toString()
         PositionAndCityName = cityName + " :" + Position
-        Log.i("asbaaa", mSharedPrefUser.getString("pathhh","nulll").toString())
 
 
         var totalPriceBagFrag = view.findViewById<TextView>(R.id.totalPriceBagFrag)
@@ -160,6 +159,7 @@ class CartFragment : Fragment() {
             }
             if(Position != "nulll" && Signature != "nulll") {
                 requestStoragePermission()
+                addToHistory()
             }
         }
 
@@ -168,11 +168,9 @@ class CartFragment : Fragment() {
 
 
     private fun reportPDF() {
-        //Dummy data
 
         facc.forEach {
             name = it.name.toString()
-            Log.i("asbaaaaaaaaaaaaaaaaaaa", name)
             quantity = it.qte.toString()
             price = it.price.toString() + " TND"
             Total = sum.toString() + " TND"
@@ -227,21 +225,48 @@ class CartFragment : Fragment() {
 
     private fun getFacData(callback: (List<Facture>) -> Unit) {
         val apiInterface = ApiUser.create()
-        apiInterface.getFac(refuser).enqueue(object : Callback<GetFactures> {
-            override fun onResponse(call: Call<GetFactures>, response: Response<GetFactures>) {
+        apiInterface.getFac(refuser).enqueue(object : Callback<Facture> {
+            override fun onResponse(call: Call<Facture>, response: Response<Facture>) {
                 if (response.isSuccessful) {
-                    return callback(response.body()!!.factures)
+                    return callback(response.body()!!.factures!!)
                     //}
                 } else {
                     Log.i("nooooo", response.body().toString())
                 }
             }
 
-            override fun onFailure(call: Call<GetFactures>, t: Throwable) {
+            override fun onFailure(call: Call<Facture>, t: Throwable) {
                 t.printStackTrace()
                 println("OnFailure")
             }
 
+        })
+    }
+    private fun addToHistory() {
+        val orderr = Order()
+        facc.forEach{
+            orderr.listString.add(it._id.toString())
+            orderr.userId = it.refuser.toString()
+
+        }
+        Log.i("ordder", orderr.toString())
+        val apiuser = ApiUser.create().addToHistory(orderr)
+        apiuser.enqueue(object : Callback<Order> {
+            override fun onResponse(
+                call: Call<Order>,
+                response: Response<Order>
+            ) {
+                if (response.isSuccessful) {
+                    println(response.body().toString())
+                    Toast.makeText(context, "article added to history", Toast.LENGTH_SHORT).show()
+                } else {
+                    println(response.body().toString())
+                }
+            }
+
+            override fun onFailure(call: Call<Order>, t: Throwable) {
+                Log.d("error",t.toString())
+            }
         })
     }
 

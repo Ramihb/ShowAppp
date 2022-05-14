@@ -39,10 +39,10 @@ class FactureViewAdapter(private val facList : List<Facture>,val context: Contex
                 builder.setMessage("Are you sure you want to delete this article from your cart?")
                 builder.setPositiveButton(android.R.string.yes) { dialog, which ->
                     val apiuserr = ApiUser.create().deleteFromFac(id,refuser)
-                    apiuserr.enqueue(object: Callback<PostFacture> {
+                    apiuserr.enqueue(object: Callback<Facture> {
                         override fun onResponse(
-                            call: Call<PostFacture>,
-                            response: Response<PostFacture>
+                            call: Call<Facture>,
+                            response: Response<Facture>
                         ) {
                             if(response.isSuccessful){
                                 println(response.body().toString())
@@ -51,7 +51,7 @@ class FactureViewAdapter(private val facList : List<Facture>,val context: Contex
                             }
                         }
 
-                        override fun onFailure(call: Call<PostFacture>, t: Throwable) {
+                        override fun onFailure(call: Call<Facture>, t: Throwable) {
                             TODO("Not yet implemented")
                         }
                     })

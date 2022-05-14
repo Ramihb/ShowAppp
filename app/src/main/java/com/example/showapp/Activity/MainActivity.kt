@@ -298,7 +298,7 @@ class MainActivity : AppCompatActivity() {
             userr.email = account.email.toString()
             userr.lastName = account.familyName.toString()
             userr.firstName = account.givenName.toString()
-            Log.i("user google est : ", userr.toString() + account.photoUrl)
+            Log.i("degla", userr.toString() + account.photoUrl)
             loadingDialog.LoadingDialog(this)
             //loadingDialog.startLoadingDialog()
             showLayout()
@@ -306,7 +306,7 @@ class MainActivity : AppCompatActivity() {
             apiuser.enqueue(object : Callback<User> {
                 override fun onResponse(call: Call<User>, response: Response<User>) {
                     if (response.isSuccessful) {
-                        Log.i("login User:", response.body()?.user?.profilePicture.toString())
+                        Log.i("degla2", response.body()?.user?.profilePicture.toString())
                         //Store company data in sharedpref
                         //mSharedPref = getSharedPreferences("UserPref", Context.MODE_PRIVATE)
                         mSharedPrefUser.edit().apply {
@@ -321,7 +321,7 @@ class MainActivity : AppCompatActivity() {
                             putString("lastName", response.body()?.user?.lastName.toString())
                             //putBoolean("session", true)
                         }.apply()
-                        Log.i("shared pref id user : ", mSharedPref.getString("UserPicture", "")!!)
+                        Log.i("degla3", mSharedPrefUser.getString("UserPicture", "").toString())
                         //loadingDialog.dismissDialog()
                         hideLayout()
                         finish()
@@ -337,6 +337,7 @@ class MainActivity : AppCompatActivity() {
                             null
                         )
                         navigateToUser()
+                        Log.i("degla4",response.body().toString())
 
                     } else {
                         //loadingDialog.dismissDialog()
@@ -388,21 +389,22 @@ class MainActivity : AppCompatActivity() {
         }
         Log.d("data to signup with social : ", data.toString())
 
-        apiInterface.userSignUpSocial(data, null).enqueue(object : Callback<User> {
+        apiInterface.userSignUpSocial(data).enqueue(object : Callback<User> {
             override fun onResponse(
                 call: Call<User>,
                 response: Response<User>
             ) {
+                println("waaaaa"+response.code())
                 if (response.isSuccessful) {
-                    mSharedPref.edit().apply {
-                        putString("UserPicture", response.body()?.user?.profilePicture.toString())
+                    mSharedPrefUser.edit().apply {
+                        putString("UserPicture", response.body()?.user?.profilePicture.toString().trim())
                         putString("UserID", response.body()?.user?._id.toString())
                         putString("firstName", response.body()?.user?.firstName.toString())
                         putString("lastName", response.body()?.user?.lastName.toString())
                         putString("email", response.body()?.user?.email.toString())
                         //putBoolean("session", true)
                     }.apply()
-                    Log.i("signup good", response.body().toString())
+                    Log.i("signup good", response.body()?.user.toString())
 //                        showAlertDialog()
                 } else {
                     Log.i("signup error", response.body().toString())

@@ -12,7 +12,6 @@ import com.bumptech.glide.Glide
 import com.example.showapp.Api.ApiUser
 import com.example.showapp.Model.Article
 import com.example.showapp.Model.Facture
-import com.example.showapp.Model.PostFacture
 import com.example.showapp.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.user_card_article_list.view.*
@@ -48,10 +47,10 @@ class filterAdapter(private val userArticleList: List<Article>, private val list
                 mSharedPref = context.getSharedPreferences("UserPref", Context.MODE_PRIVATE)
                 facturee.refuser = mSharedPref.getString("UserID", null)
                 val apiuser = ApiUser.create().addToCart(facturee)
-                apiuser.enqueue(object : Callback<PostFacture> {
+                apiuser.enqueue(object : Callback<Facture> {
                     override fun onResponse(
-                        call: Call<PostFacture>,
-                        response: Response<PostFacture>
+                        call: Call<Facture>,
+                        response: Response<Facture>
                     ) {
                         if (response.isSuccessful) {
                             println(response.body().toString())
@@ -63,7 +62,7 @@ class filterAdapter(private val userArticleList: List<Article>, private val list
                         }
                     }
 
-                    override fun onFailure(call: Call<PostFacture>, t: Throwable) {
+                    override fun onFailure(call: Call<Facture>, t: Throwable) {
                         TODO("Not yet implemented")
                     }
                 })

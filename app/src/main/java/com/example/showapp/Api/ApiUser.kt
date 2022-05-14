@@ -24,8 +24,8 @@ interface ApiUser {
     @Multipart
     @POST("users/signupMedia")
     fun userSignUpSocial(
-        @PartMap data : LinkedHashMap<String, RequestBody>,
-        @Part profilePicture: MultipartBody.Part?
+        @PartMap data : LinkedHashMap<String, RequestBody>
+        //@Part profilePicture: MultipartBody.Part?
     ) : Call<User>
 
     //login user
@@ -49,7 +49,7 @@ interface ApiUser {
     fun addToFav(@Body favorit: Favorite): Call<FavoriteResponse>
     //delete from cart
     @DELETE("factures/{refArticle}/{refuser}")
-    fun deleteFromFac(@Path("refArticle")refArticle: String?,@Path("refuser") refuser: String?) : Call<PostFacture>
+    fun deleteFromFac(@Path("refArticle")refArticle: String?,@Path("refuser") refuser: String?) : Call<Facture>
     //delete from favorit
     @DELETE("favorites/{refArticle}/{refuser}")
     fun deleteFromFav(@Path("refArticle")refArticle: String?,@Path("refuser") refuser: String?) : Call<FavoriteResponse>
@@ -58,10 +58,10 @@ interface ApiUser {
     fun getFav(@Path("refuser")refuser: String?): Call<FavoriteRefuser>
 
     @GET("/factures/refuser/{refuser}")
-    fun getFac(@Path("refuser")refuser: String?): Call<GetFactures>
+    fun getFac(@Path("refuser")refuser: String?): Call<Facture>
 
     @POST("factures/add")
-    fun addToCart(@Body facture: Facture): Call<PostFacture>
+    fun addToCart(@Body facture: Facture): Call<Facture>
 
     //Forget password1
     @POST("/users/reset")
@@ -86,6 +86,12 @@ interface ApiUser {
     //login admin
     @POST("admin/login")
     fun loginAdmin(@Body admin: Admin): Call<Admin>
+
+    //add orders history
+    //@FormUrlEncoded
+    @POST("orders")
+    fun addToHistory(@Body order: Order): Call<Order>
+    //fun addToHistory(@Field("userId") userId :String,@FieldMap order: HashMap<String?, MutableList<Facture>?>): Call<Order>
 
 
     companion object {

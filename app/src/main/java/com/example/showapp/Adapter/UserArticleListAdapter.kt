@@ -75,10 +75,10 @@ class UserArticleListAdapter(private val userArticleList: List<Article>, private
                     mSharedPref = context.getSharedPreferences("UserPref", Context.MODE_PRIVATE)
                     facturee.refuser = mSharedPref.getString("UserID", null)
                     val apiuser = ApiUser.create().addToCart(facturee)
-                    apiuser.enqueue(object : Callback<PostFacture> {
+                    apiuser.enqueue(object : Callback<Facture> {
                         override fun onResponse(
-                            call: Call<PostFacture>,
-                            response: Response<PostFacture>
+                            call: Call<Facture>,
+                            response: Response<Facture>
                         ) {
                             if (response.isSuccessful) {
                                 println(response.body().toString())
@@ -90,7 +90,7 @@ class UserArticleListAdapter(private val userArticleList: List<Article>, private
                             }
                         }
 
-                        override fun onFailure(call: Call<PostFacture>, t: Throwable) {
+                        override fun onFailure(call: Call<Facture>, t: Throwable) {
                             TODO("Not yet implemented")
                         }
                     })

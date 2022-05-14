@@ -8,12 +8,6 @@ data class Facture(
     var price: String? = null,
     var cartPicture: String? = null,
     var qte: String? = null,
-)
-
-data class GetFactures(
-    val factures: List<Facture>
-)
-
-data class PostFacture(
+    val factures: List<Facture>?= null,
     var message: String? = null
 )
