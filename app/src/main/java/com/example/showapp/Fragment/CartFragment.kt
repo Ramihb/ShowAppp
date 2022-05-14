@@ -247,7 +247,7 @@ class CartFragment : Fragment() {
         facc.forEach{
             orderr.listString.add(it._id.toString())
             orderr.userId = it.refuser.toString()
-
+            deleteFromCart(it._id.toString(),it.refuser.toString())
         }
         Log.i("ordder", orderr.toString())
         val apiuser = ApiUser.create().addToHistory(orderr)
@@ -266,6 +266,26 @@ class CartFragment : Fragment() {
 
             override fun onFailure(call: Call<Order>, t: Throwable) {
                 Log.d("error",t.toString())
+            }
+        })
+    }
+
+    private fun deleteFromCart(id: String, refuser: String){
+        val apiuserr = ApiUser.create().deleteFromFac(id,refuser)
+        apiuserr.enqueue(object: Callback<Facture> {
+            override fun onResponse(
+                call: Call<Facture>,
+                response: Response<Facture>
+            ) {
+                if(response.isSuccessful){
+                    println(response.body().toString())
+                } else{
+                    println(response.body().toString())
+                }
+            }
+
+            override fun onFailure(call: Call<Facture>, t: Throwable) {
+                TODO("Not yet implemented")
             }
         })
     }
