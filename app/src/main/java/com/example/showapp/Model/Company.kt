@@ -16,6 +16,7 @@ data class Company(
     val Company : Company? = null,
     val token : String? = null,
     val message : String? = null,
-    val error: String? = null
+    val error: String? = null,
+    val companys: ArrayList<Company> = arrayListOf(),
 )
 

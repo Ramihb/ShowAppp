@@ -1,5 +1,6 @@
 package com.example.showapp.Activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -62,7 +63,7 @@ class AdminLoginActivity : AppCompatActivity() {
 
                     loadingDialog.dismissDialog()
 
-                    //navigateToCompanyProfile()
+                    navigateToAdminMain()
 
                 } else {
                     //Toast.makeText(applicationContext, "uncorrect email or password", Toast.LENGTH_LONG).show()
@@ -77,6 +78,12 @@ class AdminLoginActivity : AppCompatActivity() {
 
         })
     }
-
     //End Admin Login
+
+    private fun navigateToAdminMain() {
+
+        val intent = Intent(this@AdminLoginActivity, AdminMainActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
 }

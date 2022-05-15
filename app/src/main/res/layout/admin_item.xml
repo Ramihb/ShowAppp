@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    card_view:cardUseCompatPadding="true"
+    card_view:cardElevation="5dp"
+    card_view:contentPadding="10dp"
+    card_view:cardCornerRadius="15dp">
+
+
+    <RelativeLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:orientation="vertical">
+
+        <ImageView android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:id="@+id/ArticleImage"/>
+
+        <TextView
+            android:id="@+id/ArticleName"
+            android:textSize="18sp"
+            android:text="Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="@color/mainText"
+            android:layout_toEndOf="@+id/ArticleImage"
+            android:layout_marginStart="20dp"/>
+
+        <TextView
+            android:id="@+id/ArticlePrice"
+            android:textSize="18sp"
+            android:text="Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="italic"
+            android:layout_toEndOf="@+id/ArticleImage"
+            android:layout_below="@+id/ArticleName"
+            android:layout_marginStart="20dp"
+            />
+        <TextView
+            android:id="@+id/ArticleQuantity"
+            android:textSize="18sp"
+            android:text="Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="italic"
+            android:layout_toEndOf="@+id/ArticleImage"
+            android:layout_below="@+id/ArticlePrice"
+            android:layout_marginStart="20dp"
+            />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
