@@ -156,6 +156,7 @@ class UserSignUp : AppCompatActivity() {
                         showAlertDialog()
                     } else {
                         Log.i("OnResponse not good", response.body().toString())
+                        loadingDialog.dismissDialog()
                     }
                 }
 

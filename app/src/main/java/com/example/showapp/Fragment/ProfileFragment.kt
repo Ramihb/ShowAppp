@@ -14,7 +14,6 @@ import android.view.ViewGroup
 import android.widget.*
 import com.bumptech.glide.Glide
 import com.example.showapp.Api.ApiUser
-import com.example.showapp.Activity.MainActivity
 import com.example.showapp.Model.User
 import com.example.showapp.R
 import com.example.showapp.Utils.Language
@@ -29,9 +28,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import android.widget.ArrayAdapter
-import com.example.showapp.Activity.QrCodeScannerActivity
-import com.example.showapp.Activity.ShippingAdressActivity
-import com.example.showapp.Activity.SignatureActivity
+import com.example.showapp.Activity.*
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.fragment_profile.*
 
@@ -310,7 +307,8 @@ class ProfileFragment : Fragment() {
 
         val FinishedOrders = view.findViewById<TextView>(R.id.FinishedOrders)
         FinishedOrders.setOnClickListener {
-            navigateToFinishedOrders()
+            //navigateToFinishedOrders()
+            navigateToOrderHistory()
         }
         return view
     }
@@ -343,6 +341,10 @@ class ProfileFragment : Fragment() {
     }
     private fun navigateToQrCodeScanner() {
         val intent = Intent(activity, QrCodeScannerActivity::class.java)
+        requireActivity().startActivity(intent)
+    }
+    private fun navigateToOrderHistory() {
+        val intent = Intent(activity, OrderHistory::class.java)
         requireActivity().startActivity(intent)
     }
 

@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.drawable.Drawable
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -18,26 +17,26 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.airbnb.lottie.LottieAnimationView
+import com.example.showapp.Activity.FinishedOrders
 import com.example.showapp.Activity.ShippingAdressActivity
 import com.example.showapp.Activity.SignatureActivity
-import com.example.showapp.Api.ApiUser
 import com.example.showapp.Adapter.FactureViewAdapter
-import com.example.showapp.Model.*
+import com.example.showapp.Api.ApiUser
+import com.example.showapp.Model.BillModelPDF
+import com.example.showapp.Model.Facture
+import com.example.showapp.Model.Order
 import com.example.showapp.R
 import com.example.showapp.Utils.Pdf
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.android.material.snackbar.Snackbar
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
-import kotlinx.android.synthetic.main.activity_user_sign_up.*
 import kotlinx.android.synthetic.main.fragment_cart.view.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.time.LocalDateTime
 
 
 class CartFragment : Fragment() {
@@ -157,15 +156,22 @@ class CartFragment : Fragment() {
                     }
                     .show()
             }
-            if(Position != "nulll" && Signature != "nulll") {
+            if(Position != "nulll" && Signature != "nulll" && sum>0) {
                 requestStoragePermission()
                 addToHistory()
+                navigateToFinishedOrders()
+
+            } else {
+                Toast.makeText(requireContext(),"no article found yet", Toast.LENGTH_SHORT).show()
             }
         }
 
         return view
     }
-
+    private fun navigateToFinishedOrders() {
+        val intent = Intent(activity, FinishedOrders::class.java)
+        requireActivity().startActivity(intent)
+    }
 
     private fun reportPDF() {
 
@@ -247,7 +253,6 @@ class CartFragment : Fragment() {
         facc.forEach{
             orderr.listString.add(it._id.toString())
             orderr.userId = it.refuser.toString()
-            deleteFromCart(it._id.toString(),it.refuser.toString())
         }
         Log.i("ordder", orderr.toString())
         val apiuser = ApiUser.create().addToHistory(orderr)
@@ -266,26 +271,6 @@ class CartFragment : Fragment() {
 
             override fun onFailure(call: Call<Order>, t: Throwable) {
                 Log.d("error",t.toString())
-            }
-        })
-    }
-
-    private fun deleteFromCart(id: String, refuser: String){
-        val apiuserr = ApiUser.create().deleteFromFac(id,refuser)
-        apiuserr.enqueue(object: Callback<Facture> {
-            override fun onResponse(
-                call: Call<Facture>,
-                response: Response<Facture>
-            ) {
-                if(response.isSuccessful){
-                    println(response.body().toString())
-                } else{
-                    println(response.body().toString())
-                }
-            }
-
-            override fun onFailure(call: Call<Facture>, t: Throwable) {
-                TODO("Not yet implemented")
             }
         })
     }

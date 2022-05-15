@@ -16,7 +16,8 @@ class MyAdapter(private val companyList : List<Article>): RecyclerView.Adapter<M
 
         fun bind(property: Article){
             itemView.ArticleName.text = property.name
-            itemView.ArticlePrice.text = property.price
+            itemView.ArticlePrice.text = "Price: " + property.price
+            itemView.ArticleQuantity.text = "Quantity: " +property.quantity.toString()
             Glide.with(itemView).load(property.articlePicture).into(itemView.ArticleImage)
         }
     }

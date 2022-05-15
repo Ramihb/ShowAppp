@@ -93,6 +93,9 @@ interface ApiUser {
     fun addToHistory(@Body order: Order): Call<Order>
     //fun addToHistory(@Field("userId") userId :String,@FieldMap order: HashMap<String?, MutableList<Facture>?>): Call<Order>
 
+    //Get orders by user id
+    @GET("orders/userId/{userId}")
+    fun getOrdersByUserId(@Path("userId") userId: String?) : Call<Order>
 
     companion object {
         fun create() : ApiUser {
